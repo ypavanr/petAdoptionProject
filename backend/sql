@@ -1,0 +1,115 @@
+CREATE SCHEMA IF NOT EXISTS petAdoption;
+SET search_path TO petAdoption;
+CREATE TYPE name AS (
+    first_name VARCHAR(20),
+    middle_name VARCHAR(20),
+    last_name VARCHAR(20)
+);
+create table donors(
+donor_id serial primary key,
+donor_name name not null,
+email varchar(50) UNIQUE not null
+);
+create table donations(
+donation_id serial primary key,
+donor_id  int NOT NULL references donors(donor_id),
+amount NUMERIC(12, 2) not null,
+donation_date date not null,
+note text
+);
+create table staff(
+staff_id serial primary key,
+staff_name name not null,
+email varchar(50) UNIQUE not null,
+password_hash varchar(70) not null,
+salary NUMERIC(12,2) not null,
+joining_date date not null,
+staff_role VARCHAR(20) NOT NULL,
+    
+    CONSTRAINT chk_role CHECK (
+        staff_role IN ('veterinarian', 'caretaker', 'admin', 'volunteer')
+    )
+);
+create table adopters(
+adopter_id serial primary key,
+adopter_name name not null,
+email varchar(50) unique not null,
+application_status varchar(9) not null,
+ CONSTRAINT chk_status CHECK(
+  application_status IN('approved','denied','pending')
+ )
+);
+create table pets(
+pet_id serial primary key,
+species varchar(20) not null,
+breed varchar(20) not null,
+age smallint not null,
+arrival_date date not null,
+status varchar(13)not null,
+constraint chk_status check(
+status in('available','not available')
+),
+description text not null,
+image_url text not null,
+name varchar(10) not null,
+gender varchar(7) not null,
+constraint chk_gender check(
+gender in('male','female')
+)
+);
+create table adoptions(
+adoption_id serial primary key,
+adopter_id int references adopters(adopter_id) on delete cascade,
+pet_id int references pets(pet_id) on delete cascade,
+adoption_date date
+);
+create table medical_records(
+record_id serial primary key,
+vet_id int references staff(staff_id) on delete set null,
+pet_id int references pets(pet_id) on delete cascade,
+check_up_date date,
+follow_up_date date,
+notes text
+);
+CREATE TABLE diagnoses (
+    diagnosis_id SERIAL PRIMARY KEY,
+    record_id INT REFERENCES medical_records(record_id) ON DELETE CASCADE,
+    diagnosis TEXT NOT NULL
+);
+
+CREATE TABLE treatments (
+    treatment_id SERIAL PRIMARY KEY,
+    record_id INT REFERENCES medical_records(record_id) ON DELETE CASCADE,
+    treatment TEXT NOT NULL
+);
+CREATE TABLE phone_numbers (
+    phone_id serial PRIMARY KEY,
+    phone_number VARCHAR(15) NOT NULL,
+
+    donor_id INT NULL,
+    staff_id INT NULL,
+    adopter_id INT NULL,
+
+    CONSTRAINT fk_donor FOREIGN KEY (donor_id) REFERENCES Donors(donor_id),
+    CONSTRAINT fk_staff FOREIGN KEY (staff_id) REFERENCES Staff(staff_id),
+    CONSTRAINT fk_adopter FOREIGN KEY (adopter_id) REFERENCES Adopters(adopter_id),
+    CONSTRAINT chk_only_one_owner CHECK (
+        (donor_id IS NOT NULL AND staff_id IS NULL AND adopter_id IS NULL) OR
+        (donor_id IS NULL AND staff_id IS NOT NULL AND adopter_id IS NULL) OR
+        (donor_id IS NULL AND staff_id IS NULL AND adopter_id IS NOT NULL)
+    )
+);
+CREATE TABLE address (
+    address_id SERIAL PRIMARY KEY,
+    street TEXT NOT NULL,
+    city TEXT NOT NULL,
+    state TEXT NOT NULL,
+    pincode TEXT NOT NULL,
+    staff_id INT REFERENCES staff(staff_id),
+    adopter_id INT REFERENCES adopters(adopter_id),
+    CHECK (
+        (staff_id IS NOT NULL AND adopter_id IS NULL)
+        OR
+        (staff_id IS NULL AND adopter_id IS NOT NULL)
+    )
+);
