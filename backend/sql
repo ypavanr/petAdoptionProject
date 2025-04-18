@@ -44,6 +44,10 @@ pet_id serial primary key,
 species varchar(20) not null,
 breed varchar(20) not null,
 age smallint not null,
+age_unit varchar(6) not null,
+constraint chk_age_unit check(
+    age_unit in('years','months','days')
+),
 arrival_date date not null,
 status varchar(13)not null,
 constraint chk_status check(
