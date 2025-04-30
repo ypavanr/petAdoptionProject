@@ -24,4 +24,5 @@ const db = new pg.Client({
   db.connect().then(()=>{
     console.log("connected to database")
   })
+  db.query("SET search_path TO petAdoption")
 export default db
