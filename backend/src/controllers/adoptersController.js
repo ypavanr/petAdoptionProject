@@ -29,8 +29,11 @@ const updateAdopterApplicationStatus=async (req,res)=>{
 }
 const createAdopter=async (req,res)=>{
     const values = {firstName, middleName, lastName, email}=req.body;
+    if(!middleName){
+        middleName=null;
+    }
     if(!firstName||!lastName||!email){
-        return res.status(400).send({ error: 'All fields are required!' });
+        return res.status(400).send({ error: 'fill all the necessary fields(first name, last name and email)' });
     }
     try{
         const mailExists=await db.query("SELECT * FROM adopters WHERE email=$1",[email]);
