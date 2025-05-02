@@ -46,15 +46,5 @@ const createNewPet=async(req,res)=>{
         res.status(500).json({ message: 'Server error' });
         }
     }
-const updatePetStatus=async(req,res)=>{
-    const {pet_id,status}=req.body;
-    try{
-        db.query("UPDATE pets SET status=$1 WHERE pet_id=$2",[status,pet_id,]);
-        res.status(200).send({ message: 'pet status updated successfully!' });
-    }
-    catch(err){
-        console.error(err);
-        res.status(500).json({ message: 'Server error' });
-    }
-}
-export {getAllPets,getPetById,getAvailablePets,createNewPet,updatePetStatus}
+
+export {getAllPets,getPetById,getAvailablePets,createNewPet}
