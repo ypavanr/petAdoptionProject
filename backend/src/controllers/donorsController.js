@@ -33,4 +33,4 @@ const getAllDonors=async (req,res)=>{
     }
 }
 
-export {createNewDonor}
+export {createNewDonor,getAllDonors}
