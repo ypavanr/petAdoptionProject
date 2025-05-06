@@ -1,4 +1,4 @@
-import db from "../index.js";
+import db from "../config/pgDB.js";
 const createNewDonor= async (req,res)=>{
     const {first_name,middle_name,last_name,email,amount,note,phone1,phone2}=req.body;
     if(!first_name||!middle_name||!last_name||!email||!amount||!note||!phone1){
@@ -16,6 +16,7 @@ const createNewDonor= async (req,res)=>{
         await db.query("INSERT INTO phone_numbers(phone_number,donor_id) VALUES ($1,$2)",[phone2,donor_id]);
        }
        await db.query("INSERT INTO donations(donor_id,amount,donation_date,note) VALUES ($1,$2,CURRENT_DATE,$3)",[donor_id,amount,note]);
+       return res.status(201).json({ message: 'Amount donated has been transferred to our bank successfully' });
     } 
     catch(err){
         console.error(err);

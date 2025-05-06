@@ -1,4 +1,4 @@
-import db from "../index.js";
+import db from "../config/pgDB.js";
 const newAdoption=async (req,res)=>{
    const {adopter_id,pet_id}=req.body;
    if(!adopter_id||!pet_id){

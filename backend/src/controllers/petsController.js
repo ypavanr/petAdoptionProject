@@ -1,8 +1,8 @@
-import db from "../index.js"
+import db from "../config/pgDB.js";
 const getAllPets=async(req,res)=>{
     try{
     const pets=await db.query("SELECT * FROM pets");
-    res.status(200).json(pets.rows);
+   return res.status(200).json(pets.rows);
 }
 catch(err){
     console.error(err);
@@ -23,7 +23,8 @@ const getPetById=async(req,res)=>{
       res.status(500).json({ message: 'Server error' });
     }
   };
-const getAvailablePets=async(req,res)=>{
+
+  const getAvailablePets=async(req,res)=>{
     try{
        const pets=await db.query("SELECT * FROM pets WHERE status='available'");
        res.status(200).json(pets.rows);

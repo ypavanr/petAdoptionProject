@@ -1,4 +1,4 @@
-import db from "../index.js"
+import db from "../config/pgDB.js";
 const getAllAdopters=async (req,res)=>{
     try{
         const adopters=await db.query("SELECT * FROM adopters");
@@ -38,7 +38,7 @@ const createAdopter=async (req,res)=>{
     try{
         const mailExists=await db.query("SELECT * FROM adopters WHERE email=$1",[email]);
         if(mailExists.rows.length>0){
-            res.status(401).send({ message:"email already exists. Adopter is already registered." });
+            return res.status(401).send({ message:"email already exists. Adopter is already registered." });
         }
        const adopterResult=  await db.query("INSERT INTO adopters (adopter_name, email, application_status) VALUES (ROW($1, $2, $3), $4, 'pending') RETURNING adopter_id",[firstName,middleName,lastName,email]);
        const adopter_id= adopterResult.rows[0].adopter_id

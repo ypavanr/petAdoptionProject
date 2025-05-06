@@ -28,6 +28,7 @@ catch(err){
     res.status(500).json({ message: 'Server error' });
 }
 }
+
 const createDiagnosisAndTreatment=async(req,res)=>{
     const { record_id, diagnoses, treatments } = req.body;
 
