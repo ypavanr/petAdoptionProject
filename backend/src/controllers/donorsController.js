@@ -25,7 +25,7 @@ const createNewDonor= async (req,res)=>{
 }
 const getAllDonors=async (req,res)=>{
     try{
-        const donors=await db.query("SELECT * FROM donors");
+        const donors=await db.query("SELECT d.donor_id,d.donor_name,d.email,array_agg(pn.phone_number) AS phone_numbers FROM donors d LEFT JOIN phone_numbers pn ON d.donor_id = pn.donor_id GROUP BY d.donor_id,d.donor_name,d.email");
         res.status(200).json(donors.rows);
     }
     catch(err){

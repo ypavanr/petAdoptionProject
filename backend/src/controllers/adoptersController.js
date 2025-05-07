@@ -1,7 +1,7 @@
 import db from "../config/pgDB.js";
 const getAllAdopters=async (req,res)=>{
     try{
-        const adopters=await db.query("SELECT * FROM adopters");
+        const adopters=await db.query("SELECT a.adopter_id, a.adopter_name,a.email,ad.street,ad.city,ad.state,ad.pincode,array_agg(pn.phone_number) AS phone_numbers FROM  adopters a LEFT JOIN  address ad ON a.adopter_id = ad.adopter_id LEFT JOIN   phone_numbers pn ON a.adopter_id = pn.adopter_id GROUP BY  a.adopter_id, a.adopter_name, a.email, ad.street, ad.city, ad.state, ad.pincode");
         res.status(200).json(adopters.rows);
     }
     catch(err){
@@ -28,7 +28,7 @@ const denyAdopterApplicationStatus=async (req,res)=>{
     }
 }
 const createAdopter=async (req,res)=>{
-    const values = {firstName, middleName, lastName, email,street,city,state,pincode,phone1,phone2}=req.body;
+    const  {firstName, middleName, lastName, email,street,city,state,pincode,phone1,phone2}=req.body;
     if(!middleName){
         middleName=null;
     }

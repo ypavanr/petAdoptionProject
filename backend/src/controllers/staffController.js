@@ -30,7 +30,7 @@ const createStaff = async (req, res) => {
 };
 const getAllStaff=async (req,res)=>{
     try{
-        const staff=await db.query("SELECT * FROM staff");
+        const staff=await db.query("SELECT s.staff_id,s.staff_name,s.email,s.staff_role,ad.street,ad.city,ad.state,ad.pincode,array_agg(pn.phone_number) AS phone_numbers FROM staff s LEFT JOIN address ad ON s.staff_id = ad.staff_id LEFT JOIN  phone_numbers pn ON s.staff_id = pn.staff_id GROUP BY s.staff_id, s.staff_name, s.email, s.staff_role, ad.street, ad.city, ad.state, ad.pincode");
         res.status(200).json(staff.rows);
     }
     catch(err){
