@@ -7,19 +7,19 @@ const authenticateAdmin=async(req,res)=>{
     bcrypt.compare(password, hashedpassword, (err, result) => {
         if (err) {
             console.log("Error comparing password:", err);
-            return res.status(500).send({ error: "Internal server error" });
+            return res.status(500).json({ error: "Internal server error" });
         }
         if (result) {
-            return res.status(200).send({
+            return res.status(200).json({
                 message: 'Admin authenticated', 
             });
         } else {
-            return res.status(401).send({ message: 'Invalid credentials' });
+            return res.status(401).json({ message: 'Invalid credentials' });
         }
     });
 } catch (error) {
     console.error("Error during login:", error);
-    return res.status(500).send({ error: "Internal server error" });
+    return res.status(500).json({ error: "Internal server error" });
 }
 } 
 
@@ -32,24 +32,24 @@ const authenticateStaff=async(req,res)=>{
             bcrypt.compare(password, hashedPassword, (err, result) => {
                 if (err) {
                     console.log("Error comparing password:", err);
-                    return res.status(500).send({ error: "Internal server error" });
+                    return res.status(500).json({ error: "Internal server error" });
                 }
                 if (result) {
                     
 
-                    return res.status(200).send({
+                    return res.status(200).json({
                         message: 'staff authenticated', 
                     });
                 } else {
-                    return res.status(401).send({ message: 'Invalid credentials' });
+                    return res.status(401).json({ message: 'Invalid credentials' });
                 }
             });
         } else {
-            return res.status(401).send({ message: 'Staff-ID does not exist. Please register' });
+            return res.status(401).json({ message: 'Staff-ID does not exist. Please register' });
         }
     } catch (error) {
         console.error("Error during login:", error);
-        return res.status(500).send({ error: "Internal server error" });
+        return res.status(500).json({ error: "Internal server error" });
     }
     }
 export {authenticateAdmin,authenticateStaff}

@@ -38,10 +38,10 @@ const getPetById=async(req,res)=>{
 const createNewPet=async(req,res)=>{
     const {species,breed,age,age_unit,arrival_date,status,description,image_url,name,gender}=req.body;
     if(!species||!breed||!age||!age_unit||!arrival_date||!status||!description||!image_url||!name||!gender)
-    {return res.status(400).send({ error: 'All fields are required!' });}
+    {return res.status(400).json({ error: 'All fields are required!' });}
     try{
         await db.query("INSERT INTO pets (species, breed, age,age_unit, arrival_date, status,description, image_url, name, gender) VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10)",[species,breed,age,age_unit,arrival_date,status,description,image_url,name,gender]);
-        res.status(200).send({ message: 'pet registered successfully!' });}
+        res.status(200).json({ message: 'pet registered successfully!' });}
         catch(err){
             console.error(err);
         res.status(500).json({ message: 'Server error' });

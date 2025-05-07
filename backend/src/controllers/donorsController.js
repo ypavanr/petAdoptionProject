@@ -2,7 +2,7 @@ import db from "../config/pgDB.js";
 const createNewDonor= async (req,res)=>{
     const {first_name,middle_name,last_name,email,amount,note,phone1,phone2}=req.body;
     if(!first_name||!middle_name||!last_name||!email||!amount||!note||!phone1){
-        return res.status(400).send({ error: 'fill all the necessary fields' });
+        return res.status(400).json({ error: 'fill all the necessary fields' });
     }
     try{
         const donorResult=await db.query("SELECT donor_id FROM donors WHERE email=$1",[email]);

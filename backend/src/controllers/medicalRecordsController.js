@@ -2,16 +2,16 @@ import db from "../config/pgDB.js";
 const createMedicalRecord=async(req,res)=>{
    const {pet_id,vet_id,checkup_date,followup_date,notes}=req.body
    if(!pet_id||!vet_id||!checkup_date||!followup_date||!notes){
-    return res.status(400).send({ error: 'All fields are required!' });
+    return res.status(400).json({ error: 'All fields are required!' });
    }
    try{
     const pet_exists=await db.query("SELECT * FROM pets WHERE pet_id=$1",[pet_id])
         if(pet_exists.rows.length==0){
-            return res.status(401).send({ message: 'Entered pet id does not exist. Please enter valid pet id' });
+            return res.status(401).json({ message: 'Entered pet id does not exist. Please enter valid pet id' });
         }
         const vet_exists=await db.query("SELECT * FROM staff WHERE staff_id=$1",[vet_id])
         if(vet_exists.rows.length==0){
-            return res.status(401).send({ message: 'Entered adopter id does not exist. Please enter valid adopter id' });
+            return res.status(401).json({ message: 'Entered adopter id does not exist. Please enter valid adopter id' });
         }
     const record_id=await db.query("INSERT INTO medical_records(vet_id, pet_id, check_up_date, follow_up_date, notes) VALUES ($1, $2, $3, $3::date + INTERVAL '7 days', $4) RETURNING record_id",[vet_id, pet_id, checkup_date, notes])
     res.status(200).json({
@@ -67,12 +67,12 @@ const createDiagnosisAndTreatment=async(req,res)=>{
 const getMedicalRecordsByID=async (req,res)=>{
     const {pet_id}=req.params;
     if(!pet_id){
-        return res.status(400).send({ error: 'Pet-ID field is empty. Please enter a Pet-ID.' });
+        return res.status(400).json({ error: 'Pet-ID field is empty. Please enter a Pet-ID.' });
     }
     try{
         const pet_exists=await db.query("SELECT * FROM pets WHERE pet_id=$1",[pet_id])
         if(pet_exists.rows.length==0){
-            return res.status(401).send({ message: 'Entered adopter id does not exist. Please enter valid adopter id' });
+            return res.status(401).json({ message: 'Entered adopter id does not exist. Please enter valid adopter id' });
         }
        const medical_records= await db.query("SELECT * FROM medical_records WHERE pet_id=$1",[pet_id]);
        res.status(200).json(medical_records.rows);
@@ -85,12 +85,12 @@ const getMedicalRecordsByID=async (req,res)=>{
 const getDiagnosisAndTreatmentByPetID=async (req,res)=>{
       const {record_id}=req.params
       if(!pet_id){
-        return res.status(400).send({ error: 'Pet-ID field is empty. Please enter a Pet-ID.' });
+        return res.status(400).json({ error: 'Pet-ID field is empty. Please enter a Pet-ID.' });
     }
     try{
         const record_exists=await db.query("SELECT * FROM medical_records WHERE record_id=$1",[record_id])
         if(record_exists.rows.length==0){
-            return res.status(401).send({ message: 'Entered record id does not exist. Please enter valid record id' });
+            return res.status(401).json({ message: 'Entered record id does not exist. Please enter valid record id' });
         }
        const diagnoses= await db.query("SELECT * FROM diagnoses WHERE record_id=$1",[record_id]);
        const treatments= await db.query("SELECT * FROM treatment WHERE record_id=$1",[record_id]);

@@ -3,7 +3,7 @@ import bcrypt from 'bcryptjs';
 const createStaff = async (req, res) => {
     const { first_name, middle_name, last_name, staff_role, street, city, state, pincode, email, salary, password, phone1, phone2 } = req.body;
     if(!first_name|| !last_name ||!staff_role ||!street ||!city|| !state||!pincode|| !email|| !salary|| !password|| !phone1){
-        return res.status(400).send({ error: 'please enter all the necessary fields ' });
+        return res.status(400).json({ error: 'please enter all the necessary fields ' });
     }
     try {
         const hashedPassword = await bcrypt.hash(password, 10);
@@ -21,11 +21,11 @@ const createStaff = async (req, res) => {
             await db.query("INSERT INTO phone_numbers(phone_number,staff_id) VALUES ($1,$2)", [phone2, staff_id]);
         }
 
-        res.status(201).send({ message: 'Staff registered successfully!' });
+        res.status(201).json({ message: 'Staff registered successfully!' });
 
     } catch (error) {
         console.error("Error during staff creation:", error);
-        res.status(500).send({ message: 'Error registering staff.' });
+        res.status(500).json({ message: 'Error registering staff.' });
     }
 };
 const getAllStaff=async (req,res)=>{
@@ -41,7 +41,7 @@ const getAllStaff=async (req,res)=>{
 const deleteStaff=async(req,res)=>{
     const {staff_id}=req.body;
     if(!staff_id){
-        return res.status(400).send({ error: 'Staff-ID not found. Please enter a Staff-ID ' });
+        return res.status(400).json({ error: 'Staff-ID not found. Please enter a Staff-ID ' });
     }
     try{
         const staffExists=await db.query("SELECT * FROM staff WHERE staff_id=$1",[staff_id])
@@ -49,11 +49,11 @@ const deleteStaff=async(req,res)=>{
             return res.status(404).json({ message: 'Staff with the entered Staff-ID does not exist. Please enter a valid Staff-ID.' });
         }
         await db.query("DELETE FROM staff WHERE staff_id=$1",[staff_id]);
-        res.status(201).send({ message: 'Staff record deleted successfully!' });
+        res.status(201).json({ message: 'Staff record deleted successfully!' });
     }
     catch (error) {
         console.error("Error during staff creation:", error);
-        res.status(500).send({ message: 'Error registering staff.' });
+        res.status(500).json({ message: 'Error registering staff.' });
     }
 }
 export {createStaff,getAllStaff,deleteStaff}

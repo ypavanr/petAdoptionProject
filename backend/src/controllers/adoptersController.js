@@ -12,7 +12,7 @@ const getAllAdopters=async (req,res)=>{
 const denyAdopterApplicationStatus=async (req,res)=>{
     const {adopter_id}=req.body;
     if(!adopter_id){
-        return res.status(400).send({ error: 'Adopter-ID not found. Please enter an Adopter-ID ' });
+        return res.status(400).json({ error: 'Adopter-ID not found. Please enter an Adopter-ID ' });
     }
     try{
         const adopter=await db.query("SELECT * FROM adopters WHERE adopter_id=$1",[adopter_id,]);
@@ -33,12 +33,12 @@ const createAdopter=async (req,res)=>{
         middleName=null;
     }
     if(!firstName||!lastName||!email||!street||!city||!state||!pincode||!phone1){
-        return res.status(400).send({ error: 'fill all the necessary fields(first name, last name and email)' });
+        return res.status(400).json({ error: 'fill all the necessary fields(first name, last name and email)' });
     }
     try{
         const mailExists=await db.query("SELECT * FROM adopters WHERE email=$1",[email]);
         if(mailExists.rows.length>0){
-            return res.status(401).send({ message:"email already exists. Adopter is already registered." });
+            return res.status(401).json({ message:"email already exists. Adopter is already registered." });
         }
        const adopterResult=  await db.query("INSERT INTO adopters (adopter_name, email, application_status) VALUES (ROW($1, $2, $3), $4, 'pending') RETURNING adopter_id",[firstName,middleName,lastName,email]);
        const adopter_id= adopterResult.rows[0].adopter_id
@@ -47,7 +47,7 @@ const createAdopter=async (req,res)=>{
        if(phone2!=null){
         await db.query("INSERT INTO phone_numbers(phone_number,adopter_id) VALUES ($1,$2)",[phone2,adopter_id]);
        }
-        res.status(201).send({ message: 'adopter registered successfully!' });}
+        res.status(201).json({ message: 'adopter registered successfully!' });}
     catch(err){
         console.error(err);
         res.status(500).json({ message: 'Server error' });
