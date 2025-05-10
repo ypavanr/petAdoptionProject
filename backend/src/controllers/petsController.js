@@ -11,9 +11,9 @@ catch(err){
 
 }
 const getPetById=async(req,res)=>{
-    const { id } = req.params;
+    const { petid } = req.params;
     try {
-      const pet  = await db.query('SELECT * FROM pets WHERE pet_id = $1', [id,]);
+      const pet  = await db.query('SELECT * FROM pets WHERE pet_id = $1', [petid]);
       if (pet.rows.length === 0) {
         return res.status(404).json({ message: 'Pet not found' });
       }

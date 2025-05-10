@@ -20,7 +20,9 @@ db.connect().then(()=>{
   console.log("connected to database")
 })
 db.query("SET search_path TO petAdoption")
-app.use("/",petRouter,donationRoutes,staffRoutes)
+app.use("/pets",petRouter)
+app.use("/donation",donationRoutes)
+app.use("/staff",staffRoutes)
 app.use("/auth",authRouter)
 app.use("/auth/admin",adminRoutes);
 app.use("/auth/vet",vetRoutes)

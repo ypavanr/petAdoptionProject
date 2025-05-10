@@ -1,22 +1,30 @@
-import React from "react";
-import details from "./Details.jsx";
-import Card from "./Card.jsx"
+import React, { useEffect, useState } from 'react';
+import Card from "./Card.jsx";
+import axios from "axios";
 
-function createGrid(details) {
-    return (
-      <Card
-        key={details.id}
-        name={details.name}
-        imgURL={details.imgURL}
-        des={details.des}
-      />
-    );
-  }
+function Grid() {
+  const [pets, setPets] = useState([]);
 
-  function Grid() {
-    return (
-      <div className="card-container">
-        {details.map(createGrid)}
-        </div>
-    )};
-    export default Grid;
+  useEffect(() => {
+    axios.get('http://localhost:3000/pets/available')
+      .then(response => {
+        console.log(response.data);
+        setPets(response.data);})
+      .catch(error => console.error("Error fetching pets:", error));
+  }, []);
+
+  return (
+    <div className="card-container">
+      {pets.map(pet => (
+        <Card
+          key={pet.pet_id}
+          name={pet.name}
+          imgURL={pet.image_url}
+          des={pet.description}
+        />
+      ))}
+    </div>
+  );
+}
+
+export default Grid;
