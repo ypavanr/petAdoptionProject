@@ -5,7 +5,7 @@ function Header() {
   return (
     <header className="header">
         <div className="info">
-           <h2>PawFamily</h2>
+           <h2>Pyaari Pets</h2>
            <h4>Tel:080 1234 5678 | Email:PawFamily@gmail.com</h4>
         </div>
         <div className="navigation">

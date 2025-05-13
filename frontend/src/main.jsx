@@ -1,6 +1,6 @@
 import React from 'react'
-import './homePage/index.css'
-import App from './homePage/App.jsx'
+import './components/homePage/index.css'
+import App from './components/homePage/App.jsx'
 import {BrowserRouter} from "react-router-dom"
 import {createRoot } from "react-dom/client"
 import { StrictMode } from 'react'
