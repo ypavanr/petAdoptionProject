@@ -64,7 +64,7 @@ const createDiagnosisAndTreatment=async(req,res)=>{
   }
 }
 
-const getMedicalRecordsByID=async (req,res)=>{
+const getMedicalRecordsByPetID=async (req,res)=>{
     const {pet_id}=req.params;
     if(!pet_id){
         return res.status(400).json({ error: 'Pet-ID field is empty. Please enter a Pet-ID.' });
@@ -82,9 +82,9 @@ const getMedicalRecordsByID=async (req,res)=>{
         res.status(500).json({ error: 'Something went wrong.' });
       } 
 }
-const getDiagnosisAndTreatmentByPetID=async (req,res)=>{
+const getDiagnosisAndTreatmentByMedicalRecordID=async (req,res)=>{
       const {record_id}=req.params
-      if(!pet_id){
+      if(!record_id){
         return res.status(400).json({ error: 'Pet-ID field is empty. Please enter a Pet-ID.' });
     }
     try{
@@ -101,7 +101,44 @@ const getDiagnosisAndTreatmentByPetID=async (req,res)=>{
         res.status(500).json({ error: 'Something went wrong.' });
       } 
 }
+const GetDiagnosisTreatmentWithMedicalRecordByPetID = async (req, res) => {
+  const { pet_id } = req.params;
+
+  if (!pet_id) {
+    return res.status(400).json({ error: 'Pet-ID field is empty. Please enter a Pet-ID.' });
+  }
+
+  try {
+    const pet = await db.query('SELECT * FROM pets WHERE pet_id = $1', [pet_id]);
+    if (pet.rows.length === 0) {
+      return res.status(404).json({ message: 'Pet not found' });
+    }
+
+    const response = await db.query(`
+      SELECT 
+        mr.record_id, 
+        mr.pet_id,
+        mr.vet_id,
+        mr.check_up_date,
+        mr.follow_up_date,
+        mr.notes,
+        array_agg(DISTINCT d.diagnosis) FILTER (WHERE d.diagnosis IS NOT NULL) AS diagnoses,
+        array_agg(DISTINCT t.treatment) FILTER (WHERE t.treatment IS NOT NULL) AS treatments
+      FROM medical_records mr
+      LEFT JOIN diagnoses d ON mr.record_id = d.record_id
+      LEFT JOIN treatments t ON mr.record_id = t.record_id
+      WHERE mr.pet_id = $1
+      GROUP BY mr.record_id
+    `, [pet_id]);
+
+    return res.status(200).json(response.rows);
+  } catch (err) {
+    console.error('Error fetching pet:', err);
+    res.status(500).json({ message: 'Server error' });
+  }
+};
+
+  
 
 
-
-export {createDiagnosisAndTreatment,createMedicalRecord,getMedicalRecordsByID,getDiagnosisAndTreatmentByPetID}
+export {createDiagnosisAndTreatment,createMedicalRecord,getMedicalRecordsByPetID,getDiagnosisAndTreatmentByMedicalRecordID,GetDiagnosisTreatmentWithMedicalRecordByPetID}

@@ -1,8 +1,8 @@
 import express from "express";
-import {createDiagnosisAndTreatment,createMedicalRecord,getMedicalRecordsByID,getDiagnosisAndTreatmentByPetID} from "../controllers/medicalRecordsController.js"
+import {createDiagnosisAndTreatment,createMedicalRecord,getMedicalRecordsByPetID,getDiagnosisAndTreatmentByMedicalRecordID,GetDiagnosisTreatmentWithMedicalRecordByPetID} from "../controllers/medicalRecordsController.js"
 const vetRoutes=express.Router()
 vetRoutes.post("/createmedicalrecord",createMedicalRecord)
 vetRoutes.post("/createmedicalrecord/creatediagnosistreatment",createDiagnosisAndTreatment)
-vetRoutes.get("/medicalrecords/:id",getMedicalRecordsByID)
-vetRoutes.get("/medicalrecords/diagnosistreatment/:id",getDiagnosisAndTreatmentByPetID)
+vetRoutes.get("/medicalrecords/:petid",getMedicalRecordsByPetID)
+vetRoutes.get("diagnosistreatment/:medicalid",getDiagnosisAndTreatmentByMedicalRecordID)
 export {vetRoutes}
