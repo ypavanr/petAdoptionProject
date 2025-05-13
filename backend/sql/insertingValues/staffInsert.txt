@@ -1,0 +1,7 @@
+INSERT INTO staff (staff_name, email, password_hash, salary, joining_date, staff_role) VALUES
+  (ROW('Frank', NULL, 'Miller'), 'frank.miller@example.com', 'hashed_password1', 50000.00, '2024-01-10', 'admin'),
+  (ROW('Grace', 'K.', 'Wilson'), 'grace.wilson@example.com', 'hashed_password2', 45000.00, '2024-02-15', 'veterinarian'),
+  (ROW('Hank', NULL, 'Moore'), 'hank.moore@example.com', 'hashed_password3', 40000.00, '2024-03-20', 'caretaker'),
+  (ROW('Ivy', 'B.', 'Taylor'), 'ivy.taylor@example.com', 'hashed_password4', 42000.00, '2024-04-25', 'volunteer'),
+  (ROW('Jack', NULL, 'Anderson'), 'jack.anderson@example.com', 'hashed_password5', 48000.00, '2024-05-30', 'veterinarian');
+

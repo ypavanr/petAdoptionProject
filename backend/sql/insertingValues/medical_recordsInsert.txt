@@ -1,0 +1,15 @@
+INSERT INTO medical_records (vet_id, pet_id, checkup_date, followup_date, notes) VALUES
+(2, 1, '2025-06-01', '2025-06-15', 'Pet appeared anxious during intake. Ticks found on the neck and minor rash noted. Started antiparasitic treatment.'),
+(2, 1, '2025-07-01', '2025-07-15', 'Follow-up showed clear skin and improved behavior. Appetite returned to normal. Declared healthy.'),
+(5, 2, '2025-06-05', '2025-06-20', 'Standard rabies vaccination administered. Cat showed signs of stress but recovered quickly. Vet advised a calm environment.'),
+(5, 2, '2025-07-10', '2025-07-25', 'New skin rash appeared under forelimbs. Possible fungal or allergic cause. Started diagnostics.'),
+(2, 3, '2025-06-10', '2025-06-25', 'Minor surgery performed for lump removal. Pet was sedated and monitored overnight. Recovery initiated.'),
+(2, 4, '2025-06-15', '2025-06-30', 'Dental examination conducted. Significant tartar buildup noted. Cleaning recommended.'),
+(2, 5, '2025-06-20', '2025-07-05', 'Excessive scratching observed. Signs point to environmental allergies. Advised allergy management.'),
+(5, 6, '2025-07-01', '2025-07-15', 'Routine check-up. All parameters normal. Slight dry skin observed.'),
+(5, 7, '2025-07-02', '2025-07-16', 'Weight assessment and activity check. Pet is in good condition. No issues reported.'),
+(2, 8, '2025-07-03', '2025-07-18', 'Ear wax buildup noted. Slight inflammation in the left ear. Cleaning procedure done.'),
+(2, 9, '2025-07-04', '2025-07-19', 'Reported limping on left hind leg. X-ray performed. No fractures found.'),
+(5, 10, '2025-07-05', '2025-07-20', 'Fur matting issue. Grooming session completed. Skin beneath healthy.'),
+(5, 11, '2025-07-06', '2025-07-21', 'Vomiting episodes reported. Exam revealed stomach sensitivity. Diet modified.'),
+(2, 12, '2025-07-07', '2025-07-22', 'Annual physical exam. Pet calm and cooperative. No health issues noted.');

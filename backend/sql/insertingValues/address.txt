@@ -1,0 +1,13 @@
+INSERT INTO address (street, city, state, pincode, staff_id, adopter_id) VALUES
+('123 Main St', 'Springfield', 'IL', '62701', 1, NULL),
+('456 Elm St', 'Shelbyville', 'IL', '62565', 2, NULL),
+('789 Oak St', 'Capital City', 'IL', '62703', 3, NULL),
+('321 Pine St', 'Ogdenville', 'IL', '62563', 4, NULL),
+('654 Maple St', 'North Haverbrook', 'IL', '62564', 5, NULL),
+
+('101 Birch St', 'Springfield', 'IL', '62704', NULL, 1),
+('202 Cedar St', 'Shelbyville', 'IL', '62566', NULL, 2),
+('303 Walnut St', 'Capital City', 'IL', '62705', NULL, 3),
+('404 Chestnut St', 'Ogdenville', 'IL', '62567', NULL, 4),
+('505 Aspen St', 'North Haverbrook', 'IL', '62568', NULL, 5);
+

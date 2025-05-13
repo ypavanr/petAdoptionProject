@@ -1,0 +1,49 @@
+INSERT INTO pets (species, breed, age, age_unit, arrival_date, status, description, image_url, name, gender) VALUES
+('Dog', 'Labrador', 3, 'years', '2025-01-05', 'available',
+ 'A little shy at first but warms up quickly with treats and love. Enjoys playing fetch and going on long walks. Gets along well with other dogs and children.',
+'https://jegxsepszaiaqwwaijfc.supabase.co/storage/v1/object/public/pet-image//snoopy.jpg', 'Buddy', 'male'),
+
+('Rabbit', 'Dutch', 1, 'years', '2025-03-15', 'not available',
+ 'Well-behaved on walks and enjoys meeting new people. Loves nibbling on fresh vegetables and relaxing in cozy corners. Great companion for quiet households.',
+'https://images.pexels.com/photos/326012/pexels-photo-326012.jpeg?auto=compress&cs=tinysrgb&w=1200', 'Thumper', 'male'),
+
+('Cat', 'Siamese', 2, 'years', '2025-02-10', 'available',
+ 'Curious explorer who loves discovering new smells and sights. Very talkative and affectionate once comfortable. She enjoys climbing and sunbathing by the window.',
+ 'https://jegxsepszaiaqwwaijfc.supabase.co/storage/v1/object/public/pet-image//snoopy_puppy.jpg', 'Whiskers', 'female'),
+
+('Dog', 'Beagle', 4, 'years', '2025-04-20', 'available',
+ 'Great with kids and loves being the center of attention. Has a playful personality and thrives in active environments. Enjoys sniffing around and going on hikes.',
+ 'http://example.com/dog2.jpg', 'Charlie', 'male'),
+
+('Cat', 'Persian', 5, 'years', '2025-05-25', 'not available',
+ 'Quiet and affectionate, she prefers calm and serene spaces. Spends her day lounging and purring beside her favorite people. Low-maintenance and very loyal.',
+'https://images.pexels.com/photos/86243/pexels-photo-86243.jpeg?auto=compress&cs=tinysrgb&w=1200', 'Luna', 'female'),
+
+('Dog', 'Bulldog', 6, 'years', '2025-01-10', 'not available',
+ 'Calm and easy-going, perfect for apartment living. Enjoys short walks and lots of naps. Great with kids and very low-energy.',
+ 'https://cdn.pixabay.com/photo/2022/09/24/16/32/bulldog-7476727_1280.jpg', 'Tank', 'male'),
+
+('Dog', 'Golden Retriever', 2, 'years', '2025-03-30', 'available',
+ 'Loves swimming and playing in the park. Friendly with both people and other pets, making him a great family addition. Has a gentle temperament and learns commands quickly.',
+ 'https://jegxsepszaiaqwwaijfc.supabase.co/storage/v1/object/public/pet-image//bruno.jpg', 'Max', 'male'),
+
+('Cat', 'Maine Coon', 3, 'years', '2025-04-08', 'available',
+ 'A majestic cat with a playful yet calm demeanor. She enjoys chasing feather toys and relaxing on high perches. Friendly, sociable, and adapts well to new environments.',
+ 'https://jegxsepszaiaqwwaijfc.supabase.co/storage/v1/object/public/pet-image//cat1.jpg', 'Cleo', 'female'),
+
+('Cat', 'Ragdoll', 4, 'years', '2025-02-18', 'not available',
+ 'Extremely affectionate and enjoys being held. Has a soft and fluffy coat that requires regular grooming. Loves following people from room to room.',
+'https://images.pexels.com/photos/784872/pexels-photo-784872.jpeg?auto=compress&cs=tinysrgb&w=1200', 'Bella', 'female'),
+
+('Rabbit', 'Holland Lop', 1, 'years', '2025-02-15', 'available',
+ 'Sweet-natured rabbit who enjoys being cuddled and groomed. Loves nibbling on carrots and hopping around the house. Very gentle and great with children.',
+'https://images.pexels.com/photos/4001296/pexels-photo-4001296.jpeg?auto=compress&cs=tinysrgb&w=1200', 'Daisy', 'female'),
+
+('Dog', 'Border Collie', 5, 'years', '2025-01-20', 'available',
+ 'Extremely intelligent and loves learning new tricks. Needs regular exercise and mental stimulation. Gets along well with other dogs and thrives with an active owner.',
+'https://images.pexels.com/photos/1124002/pexels-photo-1124002.jpeg?auto=compress&cs=tinysrgb&w=1200', 'Scout', 'male'),
+
+('Dog', 'German Shepherd', 7, 'years', '2025-01-28', 'not available',
+ 'Loyal and protective, ideal for someone looking for a guardian dog. Responds well to training and commands. Needs a patient and experienced handler.',
+'https://images.pexels.com/photos/342214/pexels-photo-342214.jpeg?auto=compress&cs=tinysrgb&w=1200', 'Rex', 'male');
+

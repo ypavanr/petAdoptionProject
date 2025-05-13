@@ -1,0 +1,15 @@
+INSERT INTO treatments (record_id, treatment) VALUES
+(1, 'Applied anti-tick solution and prescribed medicated shampoo. Instructed on regular brushing. Follow-up booked.'),
+(2, 'No treatment needed. Continued with flea prevention. Scheduled next routine visit.'),
+(3, 'Rabies vaccine injected. Pet observed post-injection. Released without symptoms.'),
+(4, 'Antifungal cream applied twice daily. Avoid outdoor exposure. Full recovery expected in 2 weeks.'),
+(5, 'Post-op antibiotics and painkillers prescribed. Stitches to be checked at follow-up. Activity restricted.'),
+(6, 'Ultrasonic scaling performed. No extractions needed. Scheduled six-month cleaning.'),
+(7, 'Prescribed antihistamines and hypoallergenic diet. Use an air purifier at home. Monitor scratching.'),
+(8, 'Recommended moisturizing cream for dry skin. Add omega-3 to your diet. Monitor for changes.'),
+(9, 'No medical treatment required. Maintain regular feeding and exercise routine.'),
+(10, 'Ear cleaned with saline. Anti-inflammatory drops prescribed. Daily cleaning advised.'),
+(11, 'Provided muscle relaxant and pain meds. Advised rest. Return if symptoms persist.'),
+(12, 'Full grooming performed. Brushed out knots. Suggested regular home grooming.'),
+(13, 'Started a pet on a bland diet of boiled chicken and rice. Probiotics given. Monitor stool.'),
+(14, 'No medical treatment necessary. Commended for excellent health. Advised yearly wellness checks.');

@@ -1,0 +1,6 @@
+INSERT INTO donations (donor_id, amount, donation_date, note) VALUES
+  (1, 100.00, '2025-01-15', 'First donation'),
+  (2, 10000.50, '2025-02-20', 'Annual contribution'),
+  (3, 7500.25, '2025-03-10', 'In memory of a pet'),
+  (4, 1500.00, '2025-04-05', 'Monthly support'),
+  (5, 20000.00, '2025-05-01', 'Special event donation');

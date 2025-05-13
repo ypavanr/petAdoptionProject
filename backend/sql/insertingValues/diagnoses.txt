@@ -1,0 +1,16 @@
+INSERT INTO diagnoses (record_id, diagnosis) VALUES
+(1, 'Ticks found near ears and back. Mild dermatitis developed. Started on anti-tick regimen.'),
+(2, 'Overall improvement seen. Coat shiny and skin clear. No medical issues noted.'),
+(3, 'Routine rabies vaccine administered. No complications. Part of annual schedule.'),
+(4, 'Mild fungal rash under front legs. Not contagious. Requires topical treatment.'),
+(5, 'Benign cyst removed from flank. No malignancy observed. Pet recovering well.'),
+(6, 'Tartar buildup along the gumline. Risk of gingivitis if untreated. Cleaning required.'),
+(7, 'Environmental allergies confirmed. Causing redness and itchiness. Dust and pollen suspected.'),
+(8, 'Skin slightly dry. No serious skin condition. Advised moisturizing balm.'),
+(9, 'Pet is active and healthy. Weight appropriate for breed. No action needed.'),
+(10, 'Ear inflammation detected. Likely from excess wax and scratching. No infection present.'),
+(11, 'Strain in the hindlimb muscles. Rest recommended. Avoid jumping or long walks.'),
+(12, 'Hair matting led to minor skin pulling. No lesions found. Grooming handled it.'),
+(13, 'Stomach lining irritated. Possibly due to recent diet change. Bland food recommended.'),
+(14, 'Healthy physical exam. Weight, temperature, and reflexes are all normal. Pet is fit.');
+

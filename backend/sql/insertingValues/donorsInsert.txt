@@ -1,0 +1,6 @@
+INSERT INTO donors (donor_name, email) VALUES
+  (ROW('Alice', 'M.', 'Johnson'), 'alice.johnson@example.com'),
+  (ROW('Bob', NULL, 'Smith'), 'bob.smith@example.com'),
+  (ROW('Carol', 'A.', 'Williams'), 'carol.williams@example.com'),
+  (ROW('David', NULL, 'Brown'), 'david.brown@example.com'),
+  (ROW('Eve', 'L.', 'Davis'), 'eve.davis@example.com');

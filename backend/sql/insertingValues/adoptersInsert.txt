@@ -1,0 +1,6 @@
+INSERT INTO adopters (adopter_name, email, application_status) VALUES
+  (ROW('Karen', NULL, 'Thomas'), 'karen.thomas@example.com', 'approved'),
+  (ROW('Leo', 'D.', 'Jackson'), 'leo.jackson@example.com', 'pending'),
+  (ROW('Mia', NULL, 'White'), 'mia.white@example.com', 'denied'),
+  (ROW('Nate', 'E.', 'Harris'), 'nate.harris@example.com', 'approved'),
+  (ROW('Olivia', NULL, 'Martin'), 'olivia.martin@example.com', 'pending');
