@@ -9,7 +9,7 @@ function Detail() {
 
   useEffect(() => {
     if (pet?.pet_id) {
-      axios.get(`http://localhost:3000/medicaldata/${pet.pet_id}`)
+      axios.get(`http://localhost:3000/pets/medicaldata/${pet.pet_id}`)
         .then(res => {
           setMedicalRecords(res.data);
         })

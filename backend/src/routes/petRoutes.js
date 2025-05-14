@@ -5,5 +5,5 @@ const petRouter=express.Router()
 petRouter.get("/allpets",getAllPets)
 petRouter.get("/available",getAvailablePets)
 petRouter.get("/:petid",getPetById)
-petRouter.get("medicaldata/:petid",GetDiagnosisTreatmentWithMedicalRecordByPetID)
+petRouter.get("/medicaldata/:pet_id",GetDiagnosisTreatmentWithMedicalRecordByPetID)
 export {petRouter}

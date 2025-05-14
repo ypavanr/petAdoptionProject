@@ -103,11 +103,9 @@ const getDiagnosisAndTreatmentByMedicalRecordID=async (req,res)=>{
 }
 const GetDiagnosisTreatmentWithMedicalRecordByPetID = async (req, res) => {
   const { pet_id } = req.params;
-
   if (!pet_id) {
     return res.status(400).json({ error: 'Pet-ID field is empty. Please enter a Pet-ID.' });
   }
-
   try {
     const pet = await db.query('SELECT * FROM pets WHERE pet_id = $1', [pet_id]);
     if (pet.rows.length === 0) {
