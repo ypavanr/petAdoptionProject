@@ -4,7 +4,7 @@ import Grid from "./Grid";
 import Footer from "./Footer";
 import About from "../aboutUs/About";
 import { Route,Routes } from "react-router-dom";
-import Apply from "./Apply";
+import Apply from "../Application/Apply";
 import Detail from "../description/detail"
 
 

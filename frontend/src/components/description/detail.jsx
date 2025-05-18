@@ -25,6 +25,7 @@ function Detail() {
     <div style={{ padding: "20px" }}>
       <h2>{pet.name}</h2>
       <img src={pet.image_url} alt={pet.name} width="300" />
+      <p><strong>Pet ID:</strong> {pet.pet_id}</p>
       <p><strong>Breed:</strong> {pet.breed}</p>
       <p><strong>Age:</strong> {pet.age} {pet.age_unit}</p>
       <p><strong>Description:</strong> {pet.description}</p>

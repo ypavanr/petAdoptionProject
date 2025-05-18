@@ -1,4 +1,4 @@
-INSERT INTO medical_records (vet_id, pet_id, checkup_date, followup_date, notes) VALUES
+INSERT INTO medical_records (vet_id, pet_id, check_up_date, follow_up_date, notes) VALUES
 (2, 1, '2025-06-01', '2025-06-15', 'Pet appeared anxious during intake. Ticks found on the neck and minor rash noted. Started antiparasitic treatment.'),
 (2, 1, '2025-07-01', '2025-07-15', 'Follow-up showed clear skin and improved behavior. Appetite returned to normal. Declared healthy.'),
 (5, 2, '2025-06-05', '2025-06-20', 'Standard rabies vaccination administered. Cat showed signs of stress but recovered quickly. Vet advised a calm environment.'),
