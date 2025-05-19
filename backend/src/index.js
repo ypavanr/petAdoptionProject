@@ -9,6 +9,7 @@ import { vetRoutes } from "./routes/vetRoutes.js";
 import { petRouter } from "./routes/petRoutes.js";
 import { donationRoutes } from "./routes/donationsRoutes.js";
 import { staffRoutes } from "./routes/staffRoutes.js";
+import { adoptersRoutes } from "./routes/adoptersRoutes.js";
 const app=express()
 env.config()
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -26,7 +27,7 @@ app.use("/staff",staffRoutes)
 app.use("/auth",authRouter)
 app.use("/auth/admin",adminRoutes);
 app.use("/auth/vet",vetRoutes)
-
+app.use("/adopters",adoptersRoutes)
 app.listen(3000,()=>{
     console.log("server listening on port 3000")
 })

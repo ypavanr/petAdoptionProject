@@ -10,7 +10,7 @@ const getAllAdopters=async (req,res)=>{
     }
 }
 const denyAdopterApplicationStatus=async (req,res)=>{
-    const {adopter_id}=req.body;
+    const {adopter_id}=req.params;
     if(!adopter_id){
         return res.status(400).json({ error: 'Adopter-ID not found. Please enter an Adopter-ID ' });
     }
@@ -21,6 +21,24 @@ const denyAdopterApplicationStatus=async (req,res)=>{
         }
         await db.query("UPDATE adopters SET application_status='denied' WHERE adopter_id=$1", [adopter_id]);
         res.status(200).json({ message: 'Application status denied successfully' });
+    }
+    catch(err){
+        console.error(err);
+        res.status(500).json({ message: 'Server error' });
+    }
+}
+const approveAdopterApplicationStatus=async (req,res)=>{
+    const {adopter_id}=req.params;
+    if(!adopter_id){
+        return res.status(400).json({ error: 'Adopter-ID not found. Please enter an Adopter-ID ' });
+    }
+    try{
+        const adopter=await db.query("SELECT * FROM adopters WHERE adopter_id=$1",[adopter_id,]);
+        if(adopter.rows.length===0){
+            return res.status(404).json({ message: 'adopter not found' });
+        }
+        await db.query("UPDATE adopters SET application_status='approve' WHERE adopter_id=$1", [adopter_id]);
+        res.status(200).json({ message: 'Application status approved successfully' });
     }
     catch(err){
         console.error(err);
@@ -53,4 +71,4 @@ const createAdopter=async (req,res)=>{
         res.status(500).json({ message: 'Server error' });
     }
 }
-export {getAllAdopters,denyAdopterApplicationStatus,createAdopter};
+export {getAllAdopters,denyAdopterApplicationStatus,approveAdopterApplicationStatus,createAdopter};
