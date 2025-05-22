@@ -1,0 +1,47 @@
+.form-container {
+  background-color: #fff3b0;
+  padding: 20px;
+  margin: 30px auto;
+  width: 90%;
+  max-width: 500px;
+  box-shadow: 0 0 12px rgba(0, 0, 0, 0.1);
+  border-radius: 12px;
+}
+
+.form-container h2,
+.form-container h3 {
+  text-align: center;
+  color: black;
+}
+
+.form-container input {
+  display: block;
+  margin: 10px 0;
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #999;
+  border-radius: 8px;
+}
+
+.form-container button {
+  background-color: gold;
+  color: white;
+  padding: 10px 16px;
+  border: none;
+  border-radius: 8px;
+  font-weight: bold;
+  margin-top: 10px;
+  cursor: pointer;
+}
+
+.message-success {
+  color: green;
+  font-weight: bold;
+  margin-top: 10px;
+}
+
+.message-error {
+  color: red;
+  font-weight: bold;
+  margin-top: 10px;
+}
