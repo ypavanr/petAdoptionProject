@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "./Apply.css";
+import Header from "../homePage/Header";
+import Footer from "../homePage/Footer";
 
 function Apply() {
   const [formData, setFormData] = useState({
@@ -80,6 +82,8 @@ function Apply() {
   };
 
   return (
+    <div>
+      <Header/>
     <div className="form-container">
       <h2>Adoption Application</h2>
 
@@ -135,6 +139,9 @@ function Apply() {
         </p>
       )}
     </div>
+    <Footer/>
+    </div>
+  
   );
 }
 

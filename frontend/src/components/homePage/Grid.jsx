@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import Card from "./Card.jsx";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import Header from "./Header";
+import Footer from "./Footer";
 
 function Grid() {
   const [pets, setPets] = useState([]);
@@ -19,7 +21,8 @@ function Grid() {
     navigate("/description", { state: { pet } });
   };
 
-  return (
+  return (<div>
+    <Header />
     <div className="card-container">
       {pets.map(pet => (
         <div key={pet.pet_id} onClick={() => handleCardClick(pet)} style={{ cursor: "pointer" }}>
@@ -30,6 +33,8 @@ function Grid() {
           />
         </div>
       ))}
+    </div>
+     <Footer />
     </div>
   );
 }

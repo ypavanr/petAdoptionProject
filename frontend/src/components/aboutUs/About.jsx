@@ -1,7 +1,10 @@
 import React from "react";
+import Header from "../homePage/Header";
+import Footer from "../homePage/Footer";
 
 function About(){
     return(<div>
+        <Header/>
    <h1>About Us</h1>
 <p>Welcome to Pyaari Pets, where we connect loving homes with adorable pets in need of a forever family.
 
@@ -40,7 +43,9 @@ Donations: Donations are crucial to our mission. They help us continue to provid
 <b>Healthy, Happy Pets:</b> Our pets undergo medical evaluations and vaccinations before adoption. They’re ready to be a part of your family.
 
 <h2>Join Our Mission</h2>
-<p>Whether you're here to adopt, donate, or volunteer, we invite you to join us in our mission to change the lives of pets and people. Together, we can make a real difference.</p></div>
+<p>Whether you're here to adopt, donate, or volunteer, we invite you to join us in our mission to change the lives of pets and people. Together, we can make a real difference.</p>
+<Footer/>
+</div>
 );
 }
 

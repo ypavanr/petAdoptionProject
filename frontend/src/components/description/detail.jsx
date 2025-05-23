@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import axios from "axios";
+import Header from "../homePage/Header";
+import Footer from "../homePage/Footer";
 
 function Detail() {
   const location = useLocation();
@@ -22,6 +24,8 @@ function Detail() {
     if (!pet) return <div>No pet selected</div>;
 
   return (
+    <div>
+    <Header />
     <div style={{ padding: "20px" }}>
       <h2>{pet.name}</h2>
       <img src={pet.image_url} alt={pet.name} width="300" />
@@ -44,6 +48,8 @@ function Detail() {
           </div>
         ))
       )}
+    </div>
+    <Footer />
     </div>
   );
 }
