@@ -1,14 +1,60 @@
 import db from "../config/pgDB.js";
-const getAllAdopters=async (req,res)=>{
-    try{
-        const adopters=await db.query("SELECT a.adopter_id, a.adopter_name,a.email,ad.street,ad.city,ad.state,ad.pincode,array_agg(pn.phone_number) AS phone_numbers FROM  adopters a LEFT JOIN  address ad ON a.adopter_id = ad.adopter_id LEFT JOIN   phone_numbers pn ON a.adopter_id = pn.adopter_id GROUP BY  a.adopter_id, a.adopter_name, a.email, ad.street, ad.city, ad.state, ad.pincode");
-        res.status(200).json(adopters.rows);
-    }
-    catch(err){
-        console.error(err);
-        res.status(500).json({ message: 'Server error' });
-    }
-}
+const getAllAdopters = async (req, res) => {
+  try {
+    const adopters = await db.query(`
+      SELECT 
+        a.adopter_id, 
+        a.adopter_name::text AS adopter_name_text,
+        a.email, 
+        a.application_status,
+        ad.street,
+        ad.city,
+        ad.state,
+        ad.pincode,
+        array_agg(DISTINCT pn.phone_number) AS phone_numbers,
+        p.pet_id,
+        p.name AS pet_name
+      FROM adopters a
+      LEFT JOIN address ad ON a.adopter_id = ad.adopter_id
+      LEFT JOIN phone_numbers pn ON a.adopter_id = pn.adopter_id
+      LEFT JOIN adoptions adopt ON a.adopter_id = adopt.adopter_id
+      LEFT JOIN pets p ON adopt.pet_id = p.pet_id
+      GROUP BY a.adopter_id, a.adopter_name, a.email, a.application_status, ad.street, ad.city, ad.state, ad.pincode, p.pet_id, p.name
+    `);
+
+    const formattedAdopters = adopters.rows.map(row => {
+      const nameParts = row.adopter_name_text
+        .replace(/^\(/, '')   
+        .replace(/\)$/, '')    
+        .split(',')
+        .map(s => s.trim().replace(/^"|"$/g, '') || '');
+
+      const [first_name, middle_name, last_name] = nameParts;
+
+      return {
+        adopter_id: row.adopter_id,
+        first_name,
+        middle_name,
+        last_name,
+        email: row.email,
+        application_status: row.application_status,
+        street: row.street,
+        city: row.city,
+        state: row.state,
+        pincode: row.pincode,
+        phone_numbers: row.phone_numbers,
+        pet_id: row.pet_id,
+        pet_name: row.pet_name
+      };
+    });
+
+    res.status(200).json(formattedAdopters);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: 'Server error' });
+  }
+};
+
 const denyAdopterApplicationStatus=async (req,res)=>{
     const {adopter_id}=req.params;
     if(!adopter_id){
@@ -37,7 +83,7 @@ const approveAdopterApplicationStatus=async (req,res)=>{
         if(adopter.rows.length===0){
             return res.status(404).json({ message: 'adopter not found' });
         }
-        await db.query("UPDATE adopters SET application_status='approve' WHERE adopter_id=$1", [adopter_id]);
+        await db.query("UPDATE adopters SET application_status='approved' WHERE adopter_id=$1", [adopter_id]);
         res.status(200).json({ message: 'Application status approved successfully' });
     }
     catch(err){

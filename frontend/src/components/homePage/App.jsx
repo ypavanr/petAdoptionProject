@@ -12,6 +12,7 @@ import ProtectedRoute from "../ManagmentLogin/ProtectedRoute";
 import Staff from "../Admin/staff";
 import Donations from "../Admin/donations";
 import Pets from "../Admin/pets"
+import Adopters from "../Admin/adopters";
 
 function App() {
   return (
@@ -52,6 +53,14 @@ function App() {
           element={
          <ProtectedRoute allowedRoles={["admin"]}>
          <Pets />
+         </ProtectedRoute>
+        }
+        />
+        <Route
+          path="/adminInterface/adoptions"
+          element={
+         <ProtectedRoute allowedRoles={["admin"]}>
+         <Adopters />
          </ProtectedRoute>
         }
         />
