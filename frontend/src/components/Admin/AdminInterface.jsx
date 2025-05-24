@@ -21,7 +21,7 @@ function AdminInterface() {
           <button className="admin-nav-btn" onClick={() => navigate("/adminInterface/staff")}>
             Manage Staff
           </button>
-          <button className="admin-nav-btn" onClick={() => navigate("/adminInterface/adopters")}>
+          <button className="admin-nav-btn" onClick={() => navigate("/adminInterface/adoptions")}>
             Manage Adopters
           </button>
           <button className="admin-nav-btn" onClick={() => navigate("/adminInterface/pets")}>

@@ -10,7 +10,7 @@ const adminRoutes=express.Router()
 adminRoutes.post("/createpet",createNewPet)
 adminRoutes.post("/createstaff",createStaff)
 adminRoutes.patch("/denyapplication/:adopter_id",denyAdopterApplicationStatus)
-adminRoutes.patch("approveapplication/:adopter_id",approveAdopterApplicationStatus)
+adminRoutes.patch("/approveapplication/:adopter_id",approveAdopterApplicationStatus)
 adminRoutes.get("/alladopters",getAllAdopters);
 adminRoutes.get("/allpets",getAllPets)
 adminRoutes.get("/allstaff",getAllStaff)
