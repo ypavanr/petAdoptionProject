@@ -2,4 +2,18 @@
 2-vet123-$2b$10$vkrOarevqmq1TTdDegiwG.tyQ9aUtDdeciWMZ/2ywIUq8e1XZmw4u
 5-vet456-$2b$10$T/isuu35oQQMTvkQVJWPdOIxshcP1fbzvu9hM6xDKBAJCw4jr/brG
 
+set search_path to petadoption;
+ALTER TABLE phone_numbers DROP CONSTRAINT fk_staff;
+ALTER TABLE phone_numbers
+ADD CONSTRAINT fk_staff
+FOREIGN KEY (staff_id)
+REFERENCES staff(staff_id)
+ON DELETE CASCADE;
 
+set search_path to petadoption;
+ALTER TABLE address DROP CONSTRAINT address_staff_id_fkey;
+ALTER TABLE address
+ADD CONSTRAINT address_staff_id_fkey
+FOREIGN KEY (staff_id)
+REFERENCES staff(staff_id)
+ON DELETE CASCADE;

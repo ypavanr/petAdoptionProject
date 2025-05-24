@@ -5,10 +5,13 @@ import About from "../aboutUs/About";
 import Apply from "../Application/Apply";
 import Detail from "../description/detail";
 import Donate from "../Donation/donate";
-import Login from "../Management/Login";
-import AdminInterface from '../Management/AdminInterface';
-import VetInterface from '../Management/VetInterface';
-import ProtectedRoute from "../Management/ProtectedRoute"; 
+import Login from "../ManagmentLogin/Login";
+import AdminInterface from "../Admin/AdminInterface";
+import VetInterface from "../Vet/VetInterface";
+import ProtectedRoute from "../ManagmentLogin/ProtectedRoute"; 
+import Staff from "../Admin/staff";
+import Donations from "../Admin/donations";
+import Pets from "../Admin/pets"
 
 function App() {
   return (
@@ -27,6 +30,30 @@ function App() {
               <AdminInterface />
             </ProtectedRoute>
           }
+        />
+        <Route
+          path="/adminInterface/staff"
+          element={
+         <ProtectedRoute allowedRoles={["admin"]}>
+         <Staff />
+         </ProtectedRoute>
+        }
+        />
+        <Route
+          path="/adminInterface/donations"
+          element={
+         <ProtectedRoute allowedRoles={["admin"]}>
+         <Donations />
+         </ProtectedRoute>
+        }
+        />
+        <Route
+          path="/adminInterface/pets"
+          element={
+         <ProtectedRoute allowedRoles={["admin"]}>
+         <Pets />
+         </ProtectedRoute>
+        }
         />
         <Route
           path="/vetInterface"

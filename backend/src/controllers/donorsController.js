@@ -39,15 +39,30 @@ const createNewDonor = async (req, res) => {
     }
 };
 
-const getAllDonors=async (req,res)=>{
-    try{
-        const donors=await db.query("SELECT d.donor_id,d.donor_name,d.email,array_agg(pn.phone_number) AS phone_numbers FROM donors d LEFT JOIN phone_numbers pn ON d.donor_id = pn.donor_id GROUP BY d.donor_id,d.donor_name,d.email");
-        res.status(200).json(donors.rows);
-    }
-    catch(err){
-        console.error(err);
+const getAllDonors = async (req, res) => {
+    try {
+       const result = await db.query(`
+      SELECT 
+        d.donor_id,
+        d.donor_name::text AS donor_name_text,  -- Just cast the whole donor_name to text
+        d.email,
+        array_agg(DISTINCT pn.phone_number) AS phone_numbers,
+        array_agg(DISTINCT jsonb_build_object(
+          'amount', dn.amount,
+          'note', dn.note,
+          'date', dn.donation_date
+        )) AS donations
+      FROM donors d
+      LEFT JOIN phone_numbers pn ON d.donor_id = pn.donor_id
+      LEFT JOIN donations dn ON d.donor_id = dn.donor_id
+      GROUP BY d.donor_id, d.donor_name, d.email
+    `);
+
+        res.status(200).json(result.rows);
+    } catch (err) {
+        console.error("getAllDonors error:", err);
         res.status(500).json({ message: 'Server error' });
     }
-}
+};
 
-export {createNewDonor,getAllDonors}
+export { createNewDonor, getAllDonors};
