@@ -13,32 +13,22 @@ const authenticate = async (req, res) => {
 
     const staff = result.rows[0];
 
-    // Check if role matches what the user claims
     if (staff.staff_role !== role) {
       return res.status(401).json({ message: 'Invalid credentials' });
     }
-
-    // Compare hashed password
-    bcrypt.compare(password, staff.password_hash, (err, isMatch) => {
-      if (err) {
-        console.log("Error comparing password:", err);
-        return res.status(500).json({ error: "Internal server error" });
-      }
-
-      if (!isMatch) {
-        return res.status(401).json({ message: 'Invalid credentials' });
-      }
-
-      return res.status(200).json({
-        message: `${role} authenticated`,
-        staff_id: staff.staff_id,
-        role: staff.staff_role
-      });
+    const isMatch = await bcrypt.compare(password, staff.password_hash);
+    if (!isMatch) {
+      return res.status(401).json({ message: 'Invalid credentials' });
+    }
+    return res.status(200).json({
+      message: `${role} authenticated`,
+      staff_id: staff.staff_id,
+      role: staff.staff_role
     });
 
   } catch (error) {
     console.error("Error during login:", error);
-    return res.status(500).json({ error: "Internal server error" });
+    return res.status(500).json({ message: "Internal server error" });
   }
 };
 
