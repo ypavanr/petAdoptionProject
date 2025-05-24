@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from 'react';
+import { supabase } from '../../supabaseClient.js';
+import { v4 as uuidv4 } from 'uuid';
 import axios from 'axios';
 import './AdminInterface.css';
 
@@ -15,6 +17,7 @@ function Pets() {
     image_url: '',
     name: '',
     gender: '',
+    image:null,
   });
 
   useEffect(() => {
@@ -30,20 +33,40 @@ function Pets() {
     }
   };
 
-  const handleChange = (e) => {
-    setForm({ ...form, [e.target.name]: e.target.value });
-  };
+  const handleChange=(e) => {
+  const {name, value, files}=e.target;
+  if (name==='image') {
+    setForm({ ...form, image: files[0] });
+  } else {
+    setForm({ ...form, [name]: value });
+  }
+};
 
-  const handleCreate = async (e) => {
+
+  const handleCreate=async (e) => {
     e.preventDefault();
     for (const key in form) {
-      if (!form[key]) {
+      if (!form[key]&&key!=='image'&&key!='image_url') {
         alert(`Please fill the ${key.replace('_', ' ')} field`);
         return;
       }
     }
+    const imageFile=form.image;
+  const imageName=`${uuidv4()}.${imageFile.name.split('.').pop()}`;
+  const { data, error }=await supabase.storage
+    .from('pet-image')
+    .upload(imageName, imageFile);
+if (error){
+    console.error('Image upload error:', error);
+    alert('Failed to upload image.');
+    return;
+  }
+
+  const imageUrl=`${supabase.storage.from('pet-image').getPublicUrl(imageName).data.publicUrl}`;
     try {
-      await axios.post('http://localhost:3000/auth/admin/createpet', form);
+       const petData={ ...form, image_url: imageUrl };
+    delete petData.image;
+      await axios.post('http://localhost:3000/auth/admin/createpet', petData);
       setForm({
         species: '',
         breed: '',
@@ -55,6 +78,7 @@ function Pets() {
         image_url: '',
         name: '',
         gender: '',
+        image:null,
       });
       fetchPets();
     } catch (err) {
@@ -131,14 +155,7 @@ function Pets() {
             onChange={handleChange}
             required
           />
-          <input
-            type="url"
-            name="image_url"
-            placeholder="Image URL"
-            value={form.image_url}
-            onChange={handleChange}
-            required
-          />
+         
           <input
             type="text"
             name="name"
@@ -158,6 +175,13 @@ function Pets() {
             <option value="female">Female</option>
             <option value="unknown">Unknown</option>
           </select>
+           <input
+            type="file"
+            name="image"
+            accept="image/*"
+            onChange={handleChange}
+            required
+          />
         </div>
         <button className="logout-btn" type="submit">Register Pet</button>
       </form>
