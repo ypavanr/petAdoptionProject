@@ -136,7 +136,30 @@ const GetDiagnosisTreatmentWithMedicalRecordByPetID = async (req, res) => {
   }
 };
 
-  
+  const GetAllMedicalRecord= async (req, res) => {
+  try {
+    const response = await db.query(`
+      SELECT 
+        mr.record_id, 
+        mr.pet_id,
+        mr.vet_id,
+        mr.check_up_date,
+        mr.follow_up_date,
+        mr.notes,
+        array_agg(DISTINCT d.diagnosis) FILTER (WHERE d.diagnosis IS NOT NULL) AS diagnoses,
+        array_agg(DISTINCT t.treatment) FILTER (WHERE t.treatment IS NOT NULL) AS treatments
+      FROM medical_records mr
+      LEFT JOIN diagnoses d ON mr.record_id = d.record_id
+      LEFT JOIN treatments t ON mr.record_id = t.record_id
+      GROUP BY mr.record_id
+    `);
+
+    res.status(200).json(response.rows);
+  } catch (err) {
+    console.error("Error fetching records:", err);
+    res.status(500).json({ message: "Server error" });
+  }
+};
 
 
-export {createDiagnosisAndTreatment,createMedicalRecord,getMedicalRecordsByPetID,getDiagnosisAndTreatmentByMedicalRecordID,GetDiagnosisTreatmentWithMedicalRecordByPetID}
+export {createDiagnosisAndTreatment,createMedicalRecord,getMedicalRecordsByPetID,getDiagnosisAndTreatmentByMedicalRecordID,GetDiagnosisTreatmentWithMedicalRecordByPetID,GetAllMedicalRecord}
