@@ -57,7 +57,6 @@ A full-stack database management system for a pet adoption center. This project 
 ![](images/physical_schema.png)
 ![](images/logical_schema.jpeg)
 
-![](images/physical_schema.png)
 
 ![](images/ER_Diagram.jpeg)
 
